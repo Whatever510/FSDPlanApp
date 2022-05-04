@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FSDApp</string>
+    <string name="drive_mode">DRIVE MODE</string>
+    <string name="plan_mode">PLAN MODE</string>
+    <string name="statistics">STATISTICS</string>
+    <string name="explore_mode">EXPLORE MODE</string>
+    <string name="intersection">INTERSECTION</string>
+    <string name="curve">SHARP CURVE</string>
+    <string name="narrow_street">NARROW STREET</string>
+    <string name="busy_area">BUSY AREA</string>
+    <string name="road_works">ROAD WORKS</string>
+    <string name="roundabout">ROUNDABOUT</string>
+    <string name="merge">MERGE</string>
+    <string name="lane_change">LANE CHANGE</string>
+    <string name="unprotected_left">UNPROTECTED LEFT</string>
+    <string name="u_turn">U-TURN</string>
+    <string name="save_route">SAVE ROUTE</string>
+    <string name="start_drive">START DRIVE</string>
+    <string name="reached_destination">YOU HAVE REACHED YOUR DESTINATION</string>
+</resources>

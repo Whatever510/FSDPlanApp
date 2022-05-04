@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="#201E1E" android:orientation="vertical"
+              app:layout_insetEdge="top">
+
+    <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button7" android:visibility="invisible"
+            android:clickable="true"/>
+    <Button
+            android:text="@string/intersection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_intersection"
+            android:onClick="onClickIntersection" android:textColor="#FFF8E1" android:autoSizeTextType="uniform"
+            android:textColorHint="#EC0E0E" android:textSize="24sp"/>
+    <Button
+            android:text="@string/unprotected_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_unprotected"
+            android:onClick="onClickUnprotected" android:autoSizeTextType="uniform" android:textSize="24sp"/>
+    <Button
+            android:text="@string/merge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_merge"
+            android:autoSizeTextType="uniform" android:textSize="24sp" android:onClick="onClickMerge"/>
+    <Button
+            android:text="@string/lane_change"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_lanechange"
+            android:autoSizeTextType="uniform" android:textSize="24sp" android:onClick="onClickLaneChange"/>
+    <Button
+            android:text="@string/u_turn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_uturn"
+            android:onClick="onClickUturn" android:autoSizeTextType="uniform" android:textSize="24sp"/>
+    <Button
+            android:text="@string/roundabout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_roundabout"
+            android:onClick="onClickRoundabout" android:autoSizeTextType="uniform" android:textSize="24sp"/>
+    <Button
+            android:text="@string/busy_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_busy"
+            android:onClick="onClickBusyArea" android:autoSizeTextType="uniform" android:textSize="24sp"/>
+    <Button
+            android:text="@string/narrow_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_narrow"
+            android:onClick="onClickNarrowStreet" android:autoSizeTextType="uniform" android:textSize="24sp"/>
+    <Button
+            android:text="@string/curve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_curve"
+            android:onClick="onClickSharpCurve" android:autoSizeTextType="uniform" android:textSize="24sp"/>
+    <Button
+            android:text="@string/road_works"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button_road_works"
+            android:onClick="onClickRoadWorks" android:autoSizeTextType="uniform" android:textSize="24sp"/>
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity" android:background="#201E1E">
+    <Button
+            android:text="@string/explore_mode"
+            android:layout_width="169dp"
+            android:layout_height="159dp" android:id="@+id/button_explore"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.066"/>
+    <Button
+            android:text="@string/statistics"
+            android:layout_width="169dp"
+            android:layout_height="159dp" android:id="@+id/button_stats"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.886"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.933"/>
+    <Button
+            android:text="@string/drive_mode"
+            android:layout_width="169dp"
+            android:layout_height="159dp" android:id="@+id/button_drive_mode"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.074"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.886"
+            android:onClick="openDriveView"/>
+    <Button
+            android:text="@string/plan_mode"
+            android:layout_width="169dp"
+            android:layout_height="159dp" android:id="@+id/button_planning_mode"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.925"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="openPlanView"/>
+    <ImageView
+            android:layout_width="375dp"
+            android:layout_height="185dp" app:srcCompat="@mipmap/start_image_view" android:id="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.033"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
