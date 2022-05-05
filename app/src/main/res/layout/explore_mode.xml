@@ -15,8 +15,8 @@
             android:text="@string/intersection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/button_intersection"
-            android:onClick="onClickIntersection" android:textColor="#FFF8E1" android:autoSizeTextType="uniform"
-            android:textColorHint="#EC0E0E" android:textSize="24sp"/>
+            android:onClick="onClickIntersection" android:autoSizeTextType="uniform"
+            android:textSize="24sp"/>
     <Button
             android:text="@string/unprotected_left"
             android:layout_width="match_parent"

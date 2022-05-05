@@ -2,6 +2,7 @@ package com.example.fsdapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -37,11 +38,15 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
     private int current_index;
     private boolean has_reached_destination;
 
+    boolean tesla;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.waypoint_mode);
+        getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         my_location = null;
+        tesla = isTeslaAppInstalled();
         imageView = findViewById(R.id.imageView_next);
         textView = findViewById(R.id.textView_info);
         init = true;
@@ -71,6 +76,21 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
     protected void onPause() {
         super.onPause();
         locationManager.removeUpdates(this);
+    }
+
+    public boolean isTeslaAppInstalled() {
+        // Check if the app com.teslamotors.tesla is installed
+        PackageManager pm = getPackageManager();
+        boolean installed = false;
+        try {
+            pm.getPackageInfo("com.google.android.apps.maps", 0);
+            installed = true;
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            installed = false;
+        }
+        Log.d("tesla", "isTeslaAppInstalled: " + installed);
+        return installed;
     }
 
     /**

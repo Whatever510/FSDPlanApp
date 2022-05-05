@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,13 +42,14 @@ public class ExploreActivity extends AppCompatActivity implements LocationListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.explore_mode);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 50, 5, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 50, 0, this);
         visited = new ArrayList<>();
         locationId = "";
         location = new Location("");
         file = new File(this.getFilesDir(), FILE_NAME);
         fileWriter = null;
         bufferedWriter = null;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -71,6 +73,7 @@ public class ExploreActivity extends AppCompatActivity implements LocationListen
      */
     @Override
     public void onLocationChanged(Location location) {
+        Log.d("LocationChanged", "Location Changed");
         this.location = location;
     }
 
@@ -80,6 +83,7 @@ public class ExploreActivity extends AppCompatActivity implements LocationListen
      */
     private String createString(String type, Location location) {
         // Create a unique identifier for the location of the user
+        Log.d("Location", location.toString());
         locationId = type + "_" + location.getLatitude() + "_" + location.getLongitude();
         if (visited.contains(locationId) || location == null || location.getLatitude() == 0.0 || location.getLongitude() == 0.0) {
             return "";
@@ -104,10 +108,12 @@ public class ExploreActivity extends AppCompatActivity implements LocationListen
         }
         try {
             if (!file.exists()) {
+                Log.d("File", "Writing to file from non exists" + file.getAbsolutePath());
                 file.createNewFile();
             }
             fileWriter = new FileWriter(file, true);
             bufferedWriter = new BufferedWriter(fileWriter);
+            Log.d("File", "Writing to file" + file.getAbsolutePath());
             bufferedWriter.write(string);
             bufferedWriter.close();
             // On success show a toast with a checkmark icon and text "Success"

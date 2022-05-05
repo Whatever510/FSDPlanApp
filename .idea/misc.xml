@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23229166666666667" />
+        <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_appicon.xml" value="0.23229166666666667" />
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_busy_selected.xml" value="0.2453125" />
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_busy_sign.xml" value="0.23229166666666667" />
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_construction_selected.xml" value="0.23125" />
@@ -15,6 +16,7 @@
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_lanechange_selected.xml" value="0.23125" />
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_lanechange_sign.xml" value="0.23229166666666667" />
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.23229166666666667" />
+        <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.23229166666666667" />
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_merge_selected.xml" value="0.23125" />
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_merge_sign.xml" value="0.23229166666666667" />
         <entry key="..\:/Programming/FSDApp/app/src/main/res/drawable/ic_narrow_selected.xml" value="0.23125" />
