@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.FileUtils;
 import android.util.Log;
@@ -83,7 +84,7 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
         PackageManager pm = getPackageManager();
         boolean installed = false;
         try {
-            pm.getPackageInfo("com.google.android.apps.maps", 0);
+            pm.getPackageInfo("com.teslamotors.tesla", 0);
             installed = true;
         }
         catch (PackageManager.NameNotFoundException e) {
@@ -103,6 +104,19 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
         return location1.distanceTo(location2);
     }
 
+    public void sendLocationToApp(Location location) {
+        // Send location to the app
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "https://www.google.com/maps/dir/?api=1&destination=" + location.getLatitude() + "," + location.getLongitude());
+        sendIntent.setType("text/plain");
+        sendIntent.setPackage("com.teslamotors.tesla");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+
+    }
+
     /**
      * This method is called when a location update is received.
      * @param location
@@ -110,8 +124,9 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
     @Override
     public void onLocationChanged(Location location) {
         my_location = location;
-
+        Location next_target = waypoints.get(current_index);
         double distance = calculateDistance(my_location, waypoints.get(current_index));
+        // Destination reached
         if (current_index == waypoint_names.size()-1 && distance < 150.0 || has_reached_destination) {
             imageView.setImageResource(R.drawable.check);
             textView.setText(R.string.reached_destination);
@@ -139,6 +154,7 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
                 if (!init) {
                     current_index++;
                 }
+                // sendLocationToApp(next_target);
                 String name = waypoint_names.get(current_index);
                 String[] parts = name.split("_");
                 String type = parts[0];
