@@ -41,12 +41,13 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
 
     boolean tesla;
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.waypoint_mode);
         getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        my_location = null;
+
         tesla = isTeslaAppInstalled();
         imageView = findViewById(R.id.imageView_next);
         textView = findViewById(R.id.textView_info);
@@ -60,6 +61,7 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
         has_reached_destination = false;
         readWaypointNames(file);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        my_location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
     }
 
     @SuppressLint("MissingPermission")
@@ -81,17 +83,20 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
 
     public boolean isTeslaAppInstalled() {
         // Check if the app com.teslamotors.tesla is installed
-        PackageManager pm = getPackageManager();
-        boolean installed = false;
-        try {
-            pm.getPackageInfo("com.teslamotors.tesla", 0);
-            installed = true;
+        PackageManager packageManager = getPackageManager();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (intent.resolveActivity(packageManager) != null) {
+            try {
+                packageManager.getPackageInfo("com.teslamotors.tesla", PackageManager.GET_ACTIVITIES);
+                Log.d("Tesla", "Tesla app is installed");
+                return true;
+            }
+            catch (PackageManager.NameNotFoundException e) {
+                Log.d("Tesla", "Tesla app is not installed");
+                return false;
+            }
         }
-        catch (PackageManager.NameNotFoundException e) {
-            installed = false;
-        }
-        Log.d("tesla", "isTeslaAppInstalled: " + installed);
-        return installed;
+        return false;
     }
 
     /**
@@ -105,15 +110,13 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
     }
 
     public void sendLocationToApp(Location location) {
-        // Send location to the app
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "https://www.google.com/maps/dir/?api=1&destination=" + location.getLatitude() + "," + location.getLongitude());
-        sendIntent.setType("text/plain");
-        sendIntent.setPackage("com.teslamotors.tesla");
-
-        Intent shareIntent = Intent.createChooser(sendIntent, null);
-        startActivity(shareIntent);
+        // Create a string in the format "geo:37.7749,-122.4194"
+        String location_string = "geo:" + location.getLatitude() + "," + location.getLongitude();
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(location_string));
+        intent.setPackage("com.teslamotors.tesla");
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
 
     }
 
@@ -154,7 +157,7 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
                 if (!init) {
                     current_index++;
                 }
-                // sendLocationToApp(next_target);
+                sendLocationToApp(next_target);
                 String name = waypoint_names.get(current_index);
                 String[] parts = name.split("_");
                 String type = parts[0];

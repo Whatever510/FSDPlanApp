@@ -6,7 +6,7 @@
 
     <ImageView
             android:layout_width="0dp"
-            android:layout_height="0dp" app:srcCompat="@drawable/ic_launcher_background"
+            android:layout_height="0dp" app:srcCompat="@drawable/wait_sign"
             android:id="@+id/imageView_next"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
