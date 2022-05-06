@@ -85,4 +85,25 @@ public class DriveActivity extends AppCompatActivity {
         }
     }
 
+    public void deleteRoute(View view) {
+        // Check if a route is selected
+        if (listView.getCheckedItemPosition() != AdapterView.INVALID_POSITION) {
+            // Get the selected index
+            int index = listView.getCheckedItemPosition();
+            // Get the selected route name
+            String route = fileList.get(index);
+            // Delete the selected route
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            File file = cw.getFileStreamPath(route);
+            file.delete();
+            // Update the list of routes
+            discoverRoutes();
+        }
+        else {
+            // Prompt user to select a route
+            String message = "Please select a route";
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

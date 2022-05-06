@@ -17,4 +17,5 @@
     <string name="save_route">SAVE ROUTE</string>
     <string name="start_drive">START DRIVE</string>
     <string name="reached_destination">YOU HAVE REACHED YOUR DESTINATION</string>
+    <string name="delete_route">DELETE ROUTE</string>
 </resources>

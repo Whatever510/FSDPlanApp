@@ -20,6 +20,14 @@
             android:id="@+id/listview_routes"
             android:choiceMode="singleChoice"
             android:listSelector="@android:color/darker_gray"
-    />
+            android:layout_marginTop="64dp"/>
+    <Button
+            android:text="@string/delete_route"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:id="@+id/button_delete_route"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/listview_routes"
+            android:backgroundTint="@color/gray_500" android:textColor="@color/black" android:textSize="20sp"
+            android:onClick="deleteRoute"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
