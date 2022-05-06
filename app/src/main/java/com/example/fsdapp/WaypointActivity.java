@@ -112,8 +112,9 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
     public void sendLocationToApp(Location location) {
         // Create a string in the format "geo:37.7749,-122.4194"
         String location_string = "geo:" + location.getLatitude() + "," + location.getLongitude();
-        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(location_string));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(location_string));
         intent.setPackage("com.teslamotors.tesla");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -127,7 +128,7 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
     @Override
     public void onLocationChanged(Location location) {
         my_location = location;
-        Location next_target = waypoints.get(current_index);
+
         double distance = calculateDistance(my_location, waypoints.get(current_index));
         // Destination reached
         if (current_index == waypoint_names.size()-1 && distance < 150.0 || has_reached_destination) {
@@ -157,6 +158,7 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
                 if (!init) {
                     current_index++;
                 }
+                Location next_target = waypoints.get(current_index);
                 sendLocationToApp(next_target);
                 String name = waypoint_names.get(current_index);
                 String[] parts = name.split("_");

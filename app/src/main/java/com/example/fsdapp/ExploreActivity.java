@@ -65,8 +65,6 @@ public class ExploreActivity extends AppCompatActivity implements LocationListen
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 50, 5, this);
     }
 
-
-
     /**
      * Callback Method for the Location Listener
      * @param location
@@ -91,7 +89,6 @@ public class ExploreActivity extends AppCompatActivity implements LocationListen
         else {
             visited.add(locationId);
         }
-
         String string = locationId + "," + type + "," + location.getLatitude() + "," + location.getLongitude() + "\n";
         return string;
     }

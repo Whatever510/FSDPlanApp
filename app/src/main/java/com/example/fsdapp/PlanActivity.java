@@ -98,10 +98,8 @@ public class PlanActivity extends AppCompatActivity {
                 FileWriter fileWriter = new FileWriter(file);
                 for (String marker_id : selected_marker_ids) {
                     fileWriter.write(marker_id + "\n");
-                    // Show a success message
-                    Toast.makeText(this, "Route planned successfully", Toast.LENGTH_SHORT).show();
-
                 }
+                Toast.makeText(this, "Route planned successfully", Toast.LENGTH_SHORT).show();
                 fileWriter.close();
             } catch (Exception e) {
                 Log.e("PlanActivity", "Error writing to file: " + e.getMessage());
