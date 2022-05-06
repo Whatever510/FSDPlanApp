@@ -36,6 +36,7 @@ public class PlanActivity extends AppCompatActivity {
 
     private LinkedHashMap<String, Boolean> isMarkerClicked;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -191,15 +192,18 @@ public class PlanActivity extends AppCompatActivity {
                         marker.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_other_sign));
                         break;
                 }
-                isMarkerClicked.put(id, false);
+                // isMarkerClicked.put(id, false);
                 marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker, MapView mapView) {
-                        // Check if the marker is in isMarkerClicked
-                        if (isMarkerClicked.containsKey(marker.getId())) {
+                        if (!isMarkerClicked.containsKey(marker.getId())) {
+                            isMarkerClicked.put(marker.getId(), true);
+                        }
+                        // Marker already in keyset
+                        else {
                             // Change the value in isMarkerClicked to the opposite
-
                             isMarkerClicked.put(marker.getId(), Boolean.FALSE.equals(isMarkerClicked.get(marker.getId())));
+                        }
 
                             switch (marker.getTitle()) {
                                 case "intersection":
@@ -293,7 +297,7 @@ public class PlanActivity extends AppCompatActivity {
                             }
 
                             Log.d("Plan Activity", "Marker clicked: " + marker.getId());
-                        }
+
                         return true;
                     }
                 });
