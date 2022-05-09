@@ -5,6 +5,16 @@
    android:layout_width="match_parent"
    android:layout_height="match_parent">
 
+    <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/switchMode"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/mapView" app:layout_constraintTop_toTopOf="parent"
+            android:splitTrack="true"
+            android:textOff="@string/plan_view"
+            android:textOn="@string/delete_view"
+            android:showText="true" android:minHeight="48dp" android:textSize="24sp"
+            android:tooltipText="@string/tooltip_switch_info"/>
     <Button
             android:text="@string/save_route"
             android:layout_width="0dp"
@@ -21,6 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="64dp"/>
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="64dp"
+            android:layout_marginTop="48dp">
+    </org.osmdroid.views.MapView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -18,10 +20,7 @@ import org.osmdroid.views.overlay.CopyrightOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -36,6 +35,10 @@ public class PlanActivity extends AppCompatActivity {
 
     private LinkedHashMap<String, Boolean> isMarkerClicked;
 
+    boolean switchOn = false;
+
+    private Switch switchButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class PlanActivity extends AppCompatActivity {
         isMarkerClicked = new LinkedHashMap<>();
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
         mapView = findViewById(R.id.mapView);
+        switchButton = findViewById(R.id.switchMode);
         setupMap();
     }
 
@@ -196,114 +200,154 @@ public class PlanActivity extends AppCompatActivity {
                 marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker, MapView mapView) {
-                        if (!isMarkerClicked.containsKey(marker.getId())) {
-                            isMarkerClicked.put(marker.getId(), true);
+                        if(!switchButton.isChecked()) {
+                            markerPlanReaction(marker, mapView);
                         }
-                        // Marker already in keyset
                         else {
-                            // Change the value in isMarkerClicked to the opposite
-                            isMarkerClicked.put(marker.getId(), Boolean.FALSE.equals(isMarkerClicked.get(marker.getId())));
+                            markerDeleteRaction(marker, mapView);
                         }
-
-                            switch (marker.getTitle()) {
-                                case "intersection":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_intersection_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_intersection_sign));
-                                    }
-                                    break;
-                                case "narrow":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_narrow_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_narrow_sign));
-                                    }
-                                    break;
-                                case "curve":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_curve_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_curve_sign));
-                                    }
-                                    break;
-                                case "lanechange":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_lanechange_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_lanechange_sign));
-                                    }
-                                    break;
-                                case "construction":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_construction_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_construction_sign));
-                                    }
-                                    break;
-                                case "roundabout":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_roundabout_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_roundabout_sign));
-                                    }
-                                    break;
-                                case "busy":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_busy_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_busy_sign));
-                                    }
-                                    break;
-                                case "merge":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_merge_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_merge_sign));
-                                    }
-                                    break;
-                                case "unprotected":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_unprotected_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_unprotected_sign));
-                                    }
-                                    break;
-                                case "uturn":
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_uturn_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_uturn_sign));
-                                    }
-                                    break;
-                                default:
-                                    if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_other_selected));
-                                    }
-                                    else {
-                                        marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_other_sign));
-                                    }
-
-                            }
-
-                            Log.d("Plan Activity", "Marker clicked: " + marker.getId());
+                        Log.d("Plan Activity", "Marker clicked: " + marker.getId());
 
                         return true;
                     }
                 });
+
+
                 mapView.getController().setCenter(new GeoPoint(lastLocation.getLatitude(), lastLocation.getLongitude()));
                 mapView.getOverlays().add(marker);
             }
+        }
+    }
+
+    public void markerDeleteRaction(Marker marker, MapView mapView) {
+        String id = marker.getId();
+        isMarkerClicked.remove(id);
+        marker.remove(mapView);
+        String filePath = getFilesDir().getAbsolutePath() + "/" + FILE_NAME;
+        // Remove the line containing the marker id from the file
+        String newText = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                if (!line.contains(id)) {
+                    newText += line + "\n";
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Write the new text with the marker id removed
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
+            bw.write(newText);
+            bw.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void markerPlanReaction(Marker marker, MapView mapView) {
+        if (!isMarkerClicked.containsKey(marker.getId())) {
+            isMarkerClicked.put(marker.getId(), true);
+        }
+        // Marker already in keyset
+        else {
+            // Change the value in isMarkerClicked to the opposite
+            isMarkerClicked.put(marker.getId(), Boolean.FALSE.equals(isMarkerClicked.get(marker.getId())));
+        }
+
+        switch (marker.getTitle()) {
+            case "intersection":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_intersection_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_intersection_sign));
+                }
+                break;
+            case "narrow":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_narrow_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_narrow_sign));
+                }
+                break;
+            case "curve":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_curve_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_curve_sign));
+                }
+                break;
+            case "lanechange":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_lanechange_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_lanechange_sign));
+                }
+                break;
+            case "construction":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_construction_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_construction_sign));
+                }
+                break;
+            case "roundabout":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_roundabout_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_roundabout_sign));
+                }
+                break;
+            case "busy":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_busy_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_busy_sign));
+                }
+                break;
+            case "merge":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_merge_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_merge_sign));
+                }
+                break;
+            case "unprotected":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_unprotected_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_unprotected_sign));
+                }
+                break;
+            case "uturn":
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_uturn_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_uturn_sign));
+                }
+                break;
+            default:
+                if(Boolean.TRUE.equals(isMarkerClicked.get(marker.getId()))) {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_other_selected));
+                }
+                else {
+                    marker.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_other_sign));
+                }
         }
     }
 }

@@ -18,4 +18,7 @@
     <string name="start_drive">START DRIVE</string>
     <string name="reached_destination">YOU HAVE REACHED YOUR DESTINATION</string>
     <string name="delete_route">DELETE ROUTE</string>
+    <string name="plan_view">PLAN VIEW</string>
+    <string name="delete_view">DELETE VIEW</string>
+    <string name="tooltip_switch_info">Plan your route in plan view. In Delete view tapping a marker will delete it</string>
 </resources>
