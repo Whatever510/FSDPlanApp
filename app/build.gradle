@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.fsdapp"
-        minSdk 28
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"

@@ -12,6 +12,7 @@ import android.os.FileUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -111,12 +112,18 @@ public class WaypointActivity extends AppCompatActivity implements LocationListe
 
     public void sendLocationToApp(Location location) {
         // Create a string in the format "geo:37.7749,-122.4194"
-        String location_string = "geo:" + location.getLatitude() + "," + location.getLongitude();
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(location_string));
-        intent.setPackage("com.teslamotors.tesla");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+        if (tesla) {
+            String location_string = "geo:" + location.getLatitude() + "," + location.getLongitude();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(location_string));
+            intent.setPackage("com.teslamotors.tesla");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+        else {
+            // Show a toast promting the user to install the Tesla app
+            Toast.makeText(this, "Please install the Tesla app", Toast.LENGTH_SHORT).show();
         }
 
     }
