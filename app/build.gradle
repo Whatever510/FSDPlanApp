@@ -3,6 +3,12 @@ plugins {
 }
 
 android {
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "FSDPlannerApp-${defaultConfig.versionName}-${variant.buildType.name}.apk"
+        }
+    }
     compileSdk 31
 
     defaultConfig {
@@ -20,6 +26,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
