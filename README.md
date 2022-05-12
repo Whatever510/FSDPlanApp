@@ -31,7 +31,7 @@ Select a route from the list and press the <button class="button-save large">Sta
 The Drive Screen <span style="font-size: 125%; color: #FF0000;">&#9316;</span> will appear.
 It shows the direct line distance to the next waypoints and sends it to the Tesla navigation system.
 
-Once you are near your destination, the next waypoint will be displayed and the navigation system will send the next destination to the Tesla.
+Once you are near your destination, the next waypoint will be displayed and the app will send the next destination to the Tesla navigation system.
 
 
 ## Deleteing Routes and Waypoints
