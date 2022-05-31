@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.fsdapp">
+          package="com.whatever.fsdapp">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,7 +25,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.FSDApp">
         <activity
-                android:name=".MainActivity"
+                android:name="com.whatever.fsdapp.MainActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -34,19 +34,19 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ExploreActivity"
+                android:name="com.whatever.fsdapp.ExploreActivity"
                 android:exported="true">
         </activity>
         <activity
-                android:name=".PlanActivity"
+                android:name="com.whatever.fsdapp.PlanActivity"
                 android:exported="true">
         </activity>
         <activity
-                android:name=".DriveActivity"
+                android:name="com.whatever.fsdapp.DriveActivity"
                 android:exported="true">
         </activity>
         <activity
-                android:name=".WaypointActivity"
+                android:name="com.whatever.fsdapp.WaypointActivity"
                 android:exported="true">
         </activity>
     </application>

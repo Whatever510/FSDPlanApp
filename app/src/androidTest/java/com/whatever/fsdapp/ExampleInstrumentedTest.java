@@ -1,4 +1,4 @@
-package com.example.fsdapp;
+package com.whatever.fsdapp;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

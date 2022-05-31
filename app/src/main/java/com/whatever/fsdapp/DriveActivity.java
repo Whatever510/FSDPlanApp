@@ -1,4 +1,4 @@
-package com.example.fsdapp;
+package com.whatever.fsdapp;
 
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import androidx.appcompat.app.AppCompatActivity;
+import com.whatever.fsdapp.R;
 
 import java.io.*;
 import java.util.ArrayList;

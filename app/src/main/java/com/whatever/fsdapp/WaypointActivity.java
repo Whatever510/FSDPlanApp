@@ -1,4 +1,4 @@
-package com.example.fsdapp;
+package com.whatever.fsdapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import com.whatever.fsdapp.R;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

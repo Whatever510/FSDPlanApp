@@ -1,4 +1,4 @@
-package com.example.fsdapp;
+package com.whatever.fsdapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,11 +6,11 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import com.whatever.fsdapp.R;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -22,7 +22,6 @@ import org.osmdroid.views.overlay.compass.CompassOverlay;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.fsdapp;
+package com.whatever.fsdapp;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.fsdapp;
+package com.whatever.fsdapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
+import com.whatever.fsdapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 

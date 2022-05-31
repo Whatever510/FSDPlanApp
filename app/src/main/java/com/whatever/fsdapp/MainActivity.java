@@ -1,4 +1,4 @@
-package com.example.fsdapp;
+package com.whatever.fsdapp;
 
 import android.Manifest;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import com.whatever.fsdapp.R;
 
 /**
  * This is the main activity of the app.
