@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.fsdapp",
+  "applicationId": "com.whatever.fsdapp",
   "variantName": "release",
   "elements": [
     {
@@ -12,8 +12,8 @@
       "filters": [],
       "attributes": [],
       "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "FSDPlannerApp-1.0-release.apk"
+      "versionName": "1.1",
+      "outputFile": "FSDPlannerApp-1.1-release.apk"
     }
   ],
   "elementType": "File"
