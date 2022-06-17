@@ -143,10 +143,23 @@ public class PlanActivity extends AppCompatActivity {
         Location lastLocation = new Location("");
         lastLocation.setLatitude(0.0);
         lastLocation.setLongitude(0.0);
+        // Print the text
+        Log.d("PlanActivity", text.toString());
+
         for (String line : text.toString().split("\n")) {
             String[] parts = line.split(",");
-            String id = parts[0];
-            String type = parts[1];
+            String id = "";
+            String type = "";
+            try {
+                id = parts[0];
+                type = parts[1];
+            } catch (Exception e) {
+                Log.e("PlanActivity", "Error parsing file: " + e.getMessage());
+                // Show a toast that the user deleted all markers and needs to survey the region again
+                Toast.makeText(this, "Please survey the region first. You´ve deleted all markers",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
             double latitude = Double.parseDouble(parts[2]);
             double longitude = Double.parseDouble(parts[3]);
 
@@ -159,7 +172,7 @@ public class PlanActivity extends AppCompatActivity {
                 marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
                 marker.setTitle(type);
                 marker.setId(id);
-                // set marker icon accoring to type
+                // set marker icon according to type
                 switch (type) {
                     case "intersection":
                         marker.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_intersection_sign));
